@@ -1,3 +1,5 @@
 /.idea/
 /__pycache__/
 /config.json
+/scraper_interest/
+/test regex.py

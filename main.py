@@ -3,6 +3,7 @@ from BddScraperInterest import BddScraperInterest
 
 
 if __name__ == '__main__':
+    print("start")
     with open("config.json") as file:
         data = json.load(file)
         host = data["host"]
@@ -13,12 +14,23 @@ if __name__ == '__main__':
     connexionDb = BddScraperInterest(host, username, password, database)
     if connexionDb.CreateConnexion():
         checkConnexion = True
+        print("Connexion Ok")
     else:
         checkConnexion = False
+        print("Error Connexion")
 
     if checkConnexion:
         "https://www.google.com/search?q=missile+brahmo&tbs=cdr%3A1%2Ccd_min%3A3%2F20%2F2023%2Ccd_max%3A3%2F20%2F2023&tbm=nws"
-        for search in connexionDb.SelectSearch():
-            print(search[0], search[1], search[2])
+        listSearch = connexionDb.SelectAllSearch()
+        for search in listSearch:
+            print("""
+###################
+#
+# """, search.getId(),"""
+# """, search.getSearch(),"""
+# """, search.getLastDate(),"""
+#
+###################
+            """)
 
 
